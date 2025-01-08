@@ -1,0 +1,14 @@
+module frequency_divider_tb; parameter DIV_FACTOR = 5; reg clk_input;
+reg rst_signal; wire clk_output;
+frequency_divider #(DIV_FACTOR) uut (
+.clk_input(clk_input),
+.rst_signal(rst_signal),
+.clk_output(clk_output)
+);
+initial begin clk_input = 0;
+forever #10 clk_input = ~clk_input; end
+initial begin rst_signal = 1;
+#20;
+rst_signal = 0;
+#200;
+$finish; end endmodule
