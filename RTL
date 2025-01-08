@@ -1,0 +1,13 @@
+module frequency_divider #(parameter DIV_FACTOR = 5) ( input clk_input,
+ 
+input rst_signal, output reg clk_output
+);
+reg [3:0] count;
+always @(posedge clk_input or posedge rst_signal) begin if (rst_signal) begin
+count <= 0;
+clk_output <= 0; end else begin
+if (count == (DIV_FACTOR - 1)) begin count <= 0;
+clk_output <= ~clk_output; end else begin
+count <= count + 1; end
+end end
+endmodule
